@@ -1,0 +1,43 @@
+{% extends 'shopapp/base.html' %}
+{% load cache %}
+
+{% block title %}
+Shop index
+{% endblock %}
+
+{% block body %}
+
+<h1> Hello Shop Index!</h1>
+
+<div>
+    <ul>
+        {% for url, description in urls %}
+        <li>{{ url }} - {{ description }}</li>
+        {% empty %}
+        No urls here
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    <strong>
+        You have {{ items }} item{{ items|pluralize:"s" }}
+    </strong><br>
+    <strong>
+        You have {{ items }} class{{ items|pluralize:"es" }}
+    </strong><br>
+    <strong>
+        You have {{ items }} cherr{{ items|pluralize:"y,ies" }}
+    </strong>
+</div>
+
+    <div>
+        Time running: {{ time_running }}
+    </div>
+    {% cache 100 lorem products %}
+    <div>
+        {% lorem 3 p random %}
+    </div>
+    {% endcache %}
+
+{% endblock %}
